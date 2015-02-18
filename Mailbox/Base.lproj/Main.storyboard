@@ -4,24 +4,110 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Mailbox View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Mailbox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MailboxViewController" customModule="Mailbox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1350"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="s5y-zD-zVO">
+                                <rect key="frame" x="0.0" y="148" width="360" height="1202"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="HF6-X4-bKr">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1202"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" id="v6y-Le-IbX">
+                                        <rect key="frame" x="0.0" y="-1" width="320" height="87"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <connections>
+                                            <segue destination="KHY-4z-qSH" kind="embed" id="5Rd-8W-K4R"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                            </scrollView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="help_label" id="eVV-43-nqF">
+                                <rect key="frame" x="0.0" y="72" width="320" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nav" id="QRl-c4-jWM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="search" id="oka-UH-R5C">
+                                <rect key="frame" x="0.0" y="107" width="320" height="42"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" id="giT-BU-Nsc">
+                                <rect key="frame" x="64" y="25" width="190" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="" image="later_nav_icon"/>
+                                    <segment title="" image="mail_nav_icon"/>
+                                    <segment title="" image="archive_nav_icon"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ao7-zb-o0s">
+                                <rect key="frame" x="0.0" y="26" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="nKn-22-AEa" appends="YES" id="dts-cl-9Xv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1350"/>
+                    <connections>
+                        <outlet property="imageView" destination="HF6-X4-bKr" id="70p-AI-FWd"/>
+                        <outlet property="scrollView" destination="s5y-zD-zVO" id="V4d-D8-Twu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="nKn-22-AEa">
+                    <connections>
+                        <action selector="didPanMenu:" destination="vXZ-lx-hvc" id="ne7-DM-oo6"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="130.13333333333333" y="623.85333333333335"/>
+            <point key="canvasLocation" x="130" y="623"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="A4b-W1-k13">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KHY-4z-qSH" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Gwa-Lx-z2m">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nf5-lM-zUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="archive_nav_icon" width="25" height="20"/>
+        <image name="feed" width="320" height="1202"/>
+        <image name="help_label" width="320" height="37"/>
+        <image name="later_nav_icon" width="25" height="20"/>
+        <image name="mail_nav_icon" width="25" height="20"/>
+        <image name="nav" width="320" height="65"/>
+        <image name="search" width="320" height="42"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <color key="tintColor" red="0.3294117647" green="0.73725490199999999" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>
