@@ -77,11 +77,14 @@
                                     <outletCollection property="gestureRecognizers" destination="nKn-22-AEa" appends="YES" id="dts-cl-9Xv"/>
                                 </connections>
                             </button>
-                            <view alpha="0.0" contentMode="scaleToFill" id="gKc-7d-V30">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" image="reschedule" id="J62-iT-piQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.65527503769399054" green="0.89813777983279686" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jW0-1q-xgr" appends="YES" id="eCJ-2h-exl"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -90,6 +93,7 @@
                     <connections>
                         <outlet property="backgroundView" destination="iTT-Uk-XyK" id="1OW-T4-NPU"/>
                         <outlet property="imageView" destination="HF6-X4-bKr" id="70p-AI-FWd"/>
+                        <outlet property="laterListView" destination="J62-iT-piQ" id="USx-cy-ff4"/>
                         <outlet property="scrollView" destination="s5y-zD-zVO" id="V4d-D8-Twu"/>
                         <outlet property="singleFeedView" destination="too-5Z-DLh" id="WiG-rj-QIu"/>
                     </connections>
@@ -105,6 +109,11 @@
                         <action selector="didPanMenu:" destination="vXZ-lx-hvc" id="ne7-DM-oo6"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="jW0-1q-xgr">
+                    <connections>
+                        <action selector="didTapLaterListView:" destination="vXZ-lx-hvc" id="5jt-nW-Tf5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="130" y="623"/>
         </scene>
@@ -131,6 +140,7 @@
         <image name="later_nav_icon" width="25" height="20"/>
         <image name="mail_nav_icon" width="25" height="20"/>
         <image name="nav" width="320" height="65"/>
+        <image name="reschedule" width="320" height="568"/>
         <image name="search" width="320" height="42"/>
         <image name="single-feed" width="320" height="86"/>
     </resources>

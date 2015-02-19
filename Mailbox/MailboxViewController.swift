@@ -14,6 +14,8 @@ class MailboxViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var singleFeedView: UIImageView!
+    @IBOutlet weak var laterListView: UIView!
+    
     var originalSingleFeedCenter: CGPoint!
     
     override func viewDidLoad() {
@@ -32,7 +34,7 @@ class MailboxViewController: UIViewController {
         var translation = sender.translationInView(view)
         var velocity = sender.velocityInView(view)
         var singleFeedOriginX = self.singleFeedView.frame.origin.x
-        
+        println("location: \(location), translation: \(translation), velocity: \(velocity.x), ")
         if (sender.state == UIGestureRecognizerState.Began) {
             originalSingleFeedCenter = singleFeedView.center
 
@@ -66,12 +68,54 @@ class MailboxViewController: UIViewController {
                 self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x + translation.x, y: self.originalSingleFeedCenter.y)
             }, completion: nil)
         } else if (sender.state == UIGestureRecognizerState.Ended) {
-            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
-                
-                self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x, y: self.originalSingleFeedCenter.y)
-                }, completion: nil)
+            
+            if (singleFeedOriginX > -60 && singleFeedOriginX < 60) {
+                UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
+
+                    // spring back to the initial position
+                    self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x, y: self.originalSingleFeedCenter.y)
+
+                    }, completion: nil)
+            } else if (singleFeedOriginX >= 60 ) { // swiped right
+                UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
+
+                    // swipe right all the way
+                    self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x + self.singleFeedView.frame.width, y: self.originalSingleFeedCenter.y)
+                    
+                    }) { (completion: Bool) -> Void in
+                        self.hideFeedItem()
+                    }
+            } else if (singleFeedOriginX <= -60 ) { // swiped left
+                UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
+                    
+                    // swipe left all the way
+                    self.singleFeedView.center = CGPoint(x: -(self.originalSingleFeedCenter.x + self.singleFeedView.frame.width), y: self.originalSingleFeedCenter.y)
+                    
+                    }) { (completion: Bool) -> Void in
+                        // display the reschedule view
+                        UIView.animateWithDuration(0.2, animations: { () -> Void in
+                            self.laterListView.alpha = 1
+                        })
+                        
+                }
+            }
         }
         
+    }
+
+    @IBAction func didTapLaterListView(sender: UITapGestureRecognizer) {
+        laterListView.hidden = true
+        hideFeedItem()
+    }
+    
+    func hideFeedItem() {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.singleFeedView.hidden = true
+            self.backgroundView.center.y -= self.singleFeedView.frame.height
+            self.imageView.center.y -= self.singleFeedView.frame.height
+            }) { (completion: Bool) -> Void in
+                self.backgroundView.hidden = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
