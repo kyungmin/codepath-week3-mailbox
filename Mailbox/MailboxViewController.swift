@@ -14,9 +14,13 @@ class MailboxViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var singleFeedView: UIImageView!
-    @IBOutlet weak var laterListView: UIView!
+    @IBOutlet weak var laterRescheduleView: UIView!
+    @IBOutlet weak var laterListView: UIImageView!
+    @IBOutlet weak var feedGroupView: UIView!
+    @IBOutlet weak var menuView: UIImageView!
     
     var originalSingleFeedCenter: CGPoint!
+    var originalFeedGroupCenter: CGPoint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,22 @@ class MailboxViewController: UIViewController {
     }
 
     @IBAction func didPanMenu(sender: UIPanGestureRecognizer) {
-            // UIPanGestureRecognizer
+        var location = sender.locationInView(view)
+        var translation = sender.translationInView(view)
+        var velocity = sender.velocityInView(view)
+
+        if (sender.state == UIGestureRecognizerState.Began) {
+            originalFeedGroupCenter = feedGroupView.center
+        } else if (sender.state == UIGestureRecognizerState.Changed) {
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                println(translation.x)
+                if (velocity.x < 0) { // swipe left
+                    self.feedGroupView.center.x += self.originalFeedGroupCenter.x
+                } else if (velocity.x > 0) { // swipe right
+                    self.feedGroupView.center.x += translation.x
+                }
+            })
+        }
     }
     
     @IBAction func didPanFeedItem(sender: UIPanGestureRecognizer) {
@@ -34,6 +53,7 @@ class MailboxViewController: UIViewController {
         var translation = sender.translationInView(view)
         var velocity = sender.velocityInView(view)
         var singleFeedOriginX = self.singleFeedView.frame.origin.x
+        
         println("location: \(location), translation: \(translation), velocity: \(velocity.x), ")
         if (sender.state == UIGestureRecognizerState.Began) {
             originalSingleFeedCenter = singleFeedView.center
@@ -64,6 +84,7 @@ class MailboxViewController: UIViewController {
                         
                     }
                 }
+
                 // move horizontally
                 self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x + translation.x, y: self.originalSingleFeedCenter.y)
             }, completion: nil)
@@ -94,7 +115,11 @@ class MailboxViewController: UIViewController {
                     }) { (completion: Bool) -> Void in
                         // display the reschedule view
                         UIView.animateWithDuration(0.2, animations: { () -> Void in
-                            self.laterListView.alpha = 1
+                            if (singleFeedOriginX <= -260) {
+                                self.laterListView.alpha = 1
+                            } else {
+                                self.laterRescheduleView.alpha = 1
+                            }
                         })
                         
                 }
@@ -103,8 +128,9 @@ class MailboxViewController: UIViewController {
         
     }
 
-    @IBAction func didTapLaterListView(sender: UITapGestureRecognizer) {
+    @IBAction func didTapLaterView(sender: UITapGestureRecognizer) {
         laterListView.hidden = true
+        laterRescheduleView.hidden = true
         hideFeedItem()
     }
     
