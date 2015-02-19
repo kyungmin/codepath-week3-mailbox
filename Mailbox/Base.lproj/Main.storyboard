@@ -20,13 +20,29 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1202"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <containerView opaque="NO" contentMode="scaleToFill" id="v6y-Le-IbX">
-                                        <rect key="frame" x="0.0" y="-1" width="320" height="87"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <view contentMode="scaleToFill" id="iTT-Uk-XyK">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="DsW-N9-Jka">
+                                                <rect key="frame" x="275" y="12" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pyG-49-ltc">
+                                                <rect key="frame" x="20" y="12" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="single-feed" id="too-5Z-DLh">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
                                         <connections>
-                                            <segue destination="KHY-4z-qSH" kind="embed" id="5Rd-8W-K4R"/>
+                                            <outletCollection property="gestureRecognizers" destination="BMX-eW-x6h" appends="YES" id="KTi-la-WLG"/>
                                         </connections>
-                                    </containerView>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="help_label" id="eVV-43-nqF">
@@ -61,17 +77,29 @@
                                     <outletCollection property="gestureRecognizers" destination="nKn-22-AEa" appends="YES" id="dts-cl-9Xv"/>
                                 </connections>
                             </button>
+                            <view alpha="0.0" contentMode="scaleToFill" id="gKc-7d-V30">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.65527503769399054" green="0.89813777983279686" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1350"/>
                     <connections>
+                        <outlet property="backgroundView" destination="iTT-Uk-XyK" id="1OW-T4-NPU"/>
                         <outlet property="imageView" destination="HF6-X4-bKr" id="70p-AI-FWd"/>
                         <outlet property="scrollView" destination="s5y-zD-zVO" id="V4d-D8-Twu"/>
+                        <outlet property="singleFeedView" destination="too-5Z-DLh" id="WiG-rj-QIu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="BMX-eW-x6h">
+                    <connections>
+                        <action selector="didPanFeedItem:" destination="vXZ-lx-hvc" id="kMu-1C-Na5"/>
+                    </connections>
+                </panGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="nKn-22-AEa">
                     <connections>
                         <action selector="didPanMenu:" destination="vXZ-lx-hvc" id="ne7-DM-oo6"/>
@@ -85,7 +113,7 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="KHY-4z-qSH" sceneMemberID="viewController">
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Gwa-Lx-z2m">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -93,6 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nf5-lM-zUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="550" y="177.5"/>
         </scene>
     </scenes>
     <resources>
@@ -103,6 +132,7 @@
         <image name="mail_nav_icon" width="25" height="20"/>
         <image name="nav" width="320" height="65"/>
         <image name="search" width="320" height="42"/>
+        <image name="single-feed" width="320" height="86"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
