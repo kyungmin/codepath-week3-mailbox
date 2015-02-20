@@ -37,14 +37,18 @@ class MailboxViewController: UIViewController {
         if (sender.state == UIGestureRecognizerState.Began) {
             originalFeedGroupCenter = feedGroupView.center
         } else if (sender.state == UIGestureRecognizerState.Changed) {
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                println(translation.x)
-                if (velocity.x < 0) { // swipe left
-                    self.feedGroupView.center.x += self.originalFeedGroupCenter.x
-                } else if (velocity.x > 0) { // swipe right
-                    self.feedGroupView.center.x += translation.x
-                }
-            })
+            self.feedGroupView.center.x = self.originalFeedGroupCenter.x + translation.x
+        } else if (sender.state == UIGestureRecognizerState.Ended) {
+            if (velocity.x < 0) { // swiped left
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.feedGroupView.center.x = self.feedGroupView.frame.width / 2
+                })
+            } else if (velocity.x > 0) { // swiped right
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.feedGroupView.center.x = self.feedGroupView.frame.width + self.feedGroupView.frame.width / 2 - 90
+                })
+            }
+
         }
     }
     
