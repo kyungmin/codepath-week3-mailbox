@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD8ECA301A98057500055565 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ECA2F1A98057500055565 /* Common.swift */; };
 		CDB1BE671A9506A60063122B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB1BE661A9506A60063122B /* AppDelegate.swift */; };
 		CDB1BE691A9506A60063122B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB1BE681A9506A60063122B /* ViewController.swift */; };
 		CDB1BE6C1A9506A60063122B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDB1BE6A1A9506A60063122B /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD8ECA2F1A98057500055565 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		CDB1BE611A9506A60063122B /* Mailbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mailbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB1BE651A9506A60063122B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDB1BE661A9506A60063122B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		CDB1BE631A9506A60063122B /* Mailbox */ = {
 			isa = PBXGroup;
 			children = (
+				CD8ECA2F1A98057500055565 /* Common.swift */,
 				CDB1BE661A9506A60063122B /* AppDelegate.swift */,
 				CDB1BE681A9506A60063122B /* ViewController.swift */,
 				CDB1BE6A1A9506A60063122B /* Main.storyboard */,
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8ECA301A98057500055565 /* Common.swift in Sources */,
 				CDB1BE691A9506A60063122B /* ViewController.swift in Sources */,
 				CDB1BE671A9506A60063122B /* AppDelegate.swift in Sources */,
 				CDB1BE871A95097F0063122B /* MailboxViewController.swift in Sources */,
@@ -411,6 +415,7 @@
 				CDB1BE821A9506A60063122B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CDB1BE831A9506A60063122B /* Build configuration list for PBXNativeTarget "MailboxTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +424,7 @@
 				CDB1BE851A9506A60063122B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
