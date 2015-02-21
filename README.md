@@ -2,7 +2,7 @@
 
 
 **How many hours did it take to complete?**
-10 hours
+8.5 hours
 
 
 **Which required and optional stories have you completed?**
