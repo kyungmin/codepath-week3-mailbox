@@ -143,20 +143,23 @@ class MailboxViewController: UIViewController {
                 
             }, completion: nil)
         } else if (sender.state == UIGestureRecognizerState.Ended) {
+            var isSwipeBackEarly = singleFeedOriginX > -60 && singleFeedOriginX < 60
+            var isSwipeBackRight = singleFeedOriginX <= -60 && velocity.x > 0
+            var isSwipeBackLeft = singleFeedOriginX >= 60 && velocity.x < 0
+            var isResetPosition = isSwipeBackEarly || isSwipeBackRight || isSwipeBackLeft
             
-            if (singleFeedOriginX > -60 && singleFeedOriginX < 60) {
+            if (isResetPosition) {
                 UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
 
                     // spring back to the initial position
                     self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x, y: self.originalSingleFeedCenter.y)
-
-                    }, completion: nil)
-            } else if (singleFeedOriginX >= 60 ) { // swiped right
+                }, completion: nil)
+            } else if (singleFeedOriginX >= 60 && velocity.x > 0) { // swiped right
                 UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
 
                     // swipe right all the way
                     self.singleFeedView.center = CGPoint(x: self.originalSingleFeedCenter.x + self.singleFeedView.frame.width, y: self.originalSingleFeedCenter.y)
-
+                    
                     // hide icons
                     self.archiveIcon.alpha = 0
                     self.deleteIcon.alpha = 0
@@ -164,7 +167,7 @@ class MailboxViewController: UIViewController {
                     }) { (completion: Bool) -> Void in
                         self.hideFeedItem()
                     }
-            } else if (singleFeedOriginX <= -60 ) { // swiped left
+            } else if (singleFeedOriginX <= -60 && velocity.x < 0) { // swiped left
                 UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.3, options: nil, animations: { () -> Void in
                     
                     // swipe left all the way
